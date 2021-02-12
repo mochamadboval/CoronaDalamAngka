@@ -2,7 +2,7 @@
   <div class="container mt-5">
     <div class="d-flex align-items-center">
       <h3 id="Provinsi" class="d-inline m-0 me-auto">Provinsi</h3> 
-      <!-- <span><fa-icon icon="calendar-day" /> 2021-02-03</span> -->
+      <span><fa-icon icon="calendar-day" /> {{ lastUpdate }}</span>
     </div>
     <hr>
     <div class="row justify-content-center mb-3">
@@ -154,7 +154,8 @@ export default {
         adult: 0,
         oldAdult: 0,
         elderly: 0,
-      }
+      },
+      lastUpdate: '0/0/0000',
     }
   },
   created() {
@@ -196,6 +197,7 @@ export default {
                 this.age.adult = province.kelompok_umur["31-45_tahun"].toLocaleString("id-ID");
                 this.age.oldAdult = province.kelompok_umur["46-59_tahun"].toLocaleString("id-ID");
                 this.age.elderly = province.kelompok_umur["≥60_tahun"].toLocaleString("id-ID");
+                this.lastUpdate = new Date(province.last_date).toLocaleString("id-ID").slice(0,-9);
 
                 const genderTotal = Number(this.gender.male) + Number(this.gender.female);
                 this.gender.malePercent = ((Number(this.gender.male) / genderTotal) * 100).toFixed(2);

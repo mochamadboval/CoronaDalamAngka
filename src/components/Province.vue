@@ -7,13 +7,13 @@
     <hr>
     <div class="row justify-content-center mb-3">
       <div class="col-9">
-        <select id="Provinces" class="form-select bg-dark text-light">
+        <select id="Provinces" class="form-select bg-dark text-light" aria-label="Pilih Provinsi">
           <option hidden>Pilih Provinsi</option>
           <option v-for="province in provinces" :key="province.provinsi">{{ province.provinsi }}</option>
         </select>
       </div>
       <div class="col-auto">
-        <button type="button" class="btn btn-outline-light" @click="getProvince">
+        <button type="button" class="btn btn-outline-light" aria-label="Lihat Data" @click="getProvince">
           <fa-icon icon="search-location" />
         </button>
       </div>

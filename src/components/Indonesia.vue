@@ -51,6 +51,11 @@
         <hr>
       </div>
     </div>
+    <p class="text-center">
+      Tingkat Kesembuhan: <strong class="text-success"> {{ recovered.rate }} %</strong> 
+      <span class="d-none d-sm-inline"> |</span> <br class="d-sm-none">
+      Tingkat Kematian: <strong class="text-danger"> {{ deaths.rate }} %</strong>
+    </p>
   </div>
 </template>
 
@@ -72,10 +77,12 @@ export default {
       recovered: {
         total: 0,
         new: 0,
+        rate: 0,
       },
       deaths: {
         total: 0,
         new: 0,
+        rate: 0,
       },
       treated: 0,
       suspect: 0,
@@ -91,8 +98,10 @@ export default {
         this.confirmed.new = data.penambahan.positif.toLocaleString("id-ID");
         this.recovered.total = data.total.sembuh.toLocaleString("id-ID");
         this.recovered.new = data.penambahan.sembuh.toLocaleString("id-ID");
+        this.recovered.rate = ((Number(data.total.sembuh) / Number(data.total.positif)) * 100).toFixed(2);
         this.deaths.total = data.total.meninggal.toLocaleString("id-ID");
         this.deaths.new = data.penambahan.meninggal.toLocaleString("id-ID");
+        this.deaths.rate = ((Number(data.total.meninggal) / Number(data.total.positif)) * 100).toFixed(2);
         this.treated = data.total.dirawat.toLocaleString("id-ID");
         this.suspect = data.data.odp.toLocaleString("id-ID");
         this.lastUpdate = new Date(data.total.lastUpdate).toLocaleString("id-ID").slice(0,-3);

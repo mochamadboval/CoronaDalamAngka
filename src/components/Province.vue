@@ -190,13 +190,13 @@ export default {
                 this.deaths.new = province.penambahan.meninggal.toLocaleString("id-ID");
                 this.treated = province.dirawat.toLocaleString("id-ID");
                 this.gender.male = province.jenis_kelamin["laki-laki"].toLocaleString("id-ID");
-                this.gender.female = province.jenis_kelamin["perempuan"].toLocaleString("id-ID");
-                this.age.toddler = province.kelompok_umur["0-5_tahun"].toLocaleString("id-ID");
-                this.age.child = province.kelompok_umur["6-18_tahun"].toLocaleString("id-ID");
-                this.age.youngAdult = province.kelompok_umur["19-30_tahun"].toLocaleString("id-ID");
-                this.age.adult = province.kelompok_umur["31-45_tahun"].toLocaleString("id-ID");
-                this.age.oldAdult = province.kelompok_umur["46-59_tahun"].toLocaleString("id-ID");
-                this.age.elderly = province.kelompok_umur["≥60_tahun"].toLocaleString("id-ID");
+                this.gender.female = province.jenis_kelamin.perempuan.toLocaleString("id-ID");
+                this.age.toddler = province.kelompok_umur[0]["0-5"].toLocaleString("id-ID");
+                this.age.child = province.kelompok_umur[1]["6-18"].toLocaleString("id-ID");
+                this.age.youngAdult = province.kelompok_umur[2]["19-30"].toLocaleString("id-ID");
+                this.age.adult = province.kelompok_umur[3]["31-45"].toLocaleString("id-ID");
+                this.age.oldAdult = province.kelompok_umur[4]["46-59"].toLocaleString("id-ID");
+                this.age.elderly = province.kelompok_umur[5]["≥ 60"].toLocaleString("id-ID");
                 this.lastUpdate = new Date(province.last_date).toLocaleString("id-ID").slice(0,-9);
 
                 const genderTotal = Number(this.gender.male) + Number(this.gender.female);

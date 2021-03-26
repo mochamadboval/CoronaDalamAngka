@@ -9,7 +9,7 @@
       <div class="col-9">
         <select id="Provinces" class="form-select bg-dark text-light" aria-label="Pilih Provinsi">
           <option hidden>Pilih Provinsi</option>
-          <option v-for="province in provinces" :key="province.provinsi">{{ province.provinsi }}</option>
+          <option v-for="province in provincesSorted" :key="province.provinsi">{{ province.provinsi }}</option>
         </select>
       </div>
       <div class="col-auto">
@@ -127,6 +127,7 @@ export default {
   data() {
     return {
       provinces: [],
+      provincesSorted: [],
       confirmed: {
         total: 0,
         new: 0,
@@ -159,12 +160,14 @@ export default {
     }
   },
   created() {
-    axios.get('https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi')
+    axios.get('https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi/more')
       .then((response) => {
         const data = response.data;
-
-        data.sort((a,b) => (a.provinsi > b.provinsi ? 1 : -1));
         this.provinces = data;
+
+        const sorted = [...this.provinces];
+        sorted.sort((a,b) => (a.provinsi > b.provinsi ? 1 : -1));
+        this.provincesSorted = sorted;
       });
   },
   methods: {
@@ -174,64 +177,61 @@ export default {
       if (provinceSelected === 'Pilih Provinsi') {
         alert('Pilih Provinsi terlebih dahulu!');
       } else {
-        axios.get('https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi/more')
-          .then((response) => {
-            const data = response.data;
+        const data = this.provinces;
 
-            this.rank = data.findIndex((province) => province.provinsi === provinceSelected) + 1;
+        this.rank = data.findIndex((province) => province.provinsi === provinceSelected) + 1;
 
-            data.find((province) => {
-              if (province.provinsi === provinceSelected) {
-                this.confirmed.total = province.kasus.toLocaleString("id-ID");
-                this.confirmed.new = province.penambahan.positif.toLocaleString("id-ID");
-                this.recovered.total = province.sembuh.toLocaleString("id-ID");
-                this.recovered.new = province.penambahan.sembuh.toLocaleString("id-ID");
-                this.deaths.total = province.meninggal.toLocaleString("id-ID");
-                this.deaths.new = province.penambahan.meninggal.toLocaleString("id-ID");
-                this.treated = province.dirawat.toLocaleString("id-ID");
-                this.gender.male = province.jenis_kelamin["laki-laki"].toLocaleString("id-ID");
-                this.gender.female = province.jenis_kelamin.perempuan.toLocaleString("id-ID");
-                this.age.toddler = province.kelompok_umur[0]["0-5"].toLocaleString("id-ID");
-                this.age.child = province.kelompok_umur[1]["6-18"].toLocaleString("id-ID");
-                this.age.youngAdult = province.kelompok_umur[2]["19-30"].toLocaleString("id-ID");
-                this.age.adult = province.kelompok_umur[3]["31-45"].toLocaleString("id-ID");
-                this.age.oldAdult = province.kelompok_umur[4]["46-59"].toLocaleString("id-ID");
-                this.age.elderly = province.kelompok_umur[5]["≥ 60"].toLocaleString("id-ID");
-                this.lastUpdate = new Date(province.last_date).toLocaleString("id-ID").slice(0,-9);
+        data.find((province) => {
+          if (province.provinsi === provinceSelected) {
+            this.confirmed.total = province.kasus.toLocaleString("id-ID");
+            this.confirmed.new = province.penambahan.positif.toLocaleString("id-ID");
+            this.recovered.total = province.sembuh.toLocaleString("id-ID");
+            this.recovered.new = province.penambahan.sembuh.toLocaleString("id-ID");
+            this.deaths.total = province.meninggal.toLocaleString("id-ID");
+            this.deaths.new = province.penambahan.meninggal.toLocaleString("id-ID");
+            this.treated = province.dirawat.toLocaleString("id-ID");
+            this.gender.male = province.jenis_kelamin["laki-laki"].toLocaleString("id-ID");
+            this.gender.female = province.jenis_kelamin.perempuan.toLocaleString("id-ID");
+            this.age.toddler = province.kelompok_umur[0]["0-5"].toLocaleString("id-ID");
+            this.age.child = province.kelompok_umur[1]["6-18"].toLocaleString("id-ID");
+            this.age.youngAdult = province.kelompok_umur[2]["19-30"].toLocaleString("id-ID");
+            this.age.adult = province.kelompok_umur[3]["31-45"].toLocaleString("id-ID");
+            this.age.oldAdult = province.kelompok_umur[4]["46-59"].toLocaleString("id-ID");
+            this.age.elderly = province.kelompok_umur[5]["≥ 60"].toLocaleString("id-ID");
+            this.lastUpdate = new Date(province.last_date).toLocaleString("id-ID").slice(0,-9);
 
-                const genderTotal = Number(this.gender.male) + Number(this.gender.female);
-                this.gender.malePercent = ((Number(this.gender.male) / genderTotal) * 100).toFixed(2);
-                this.gender.femalePercent = ((Number(this.gender.female) / genderTotal) * 100).toFixed(2);
-              }
+            const genderTotal = Number(this.gender.male) + Number(this.gender.female);
+            this.gender.malePercent = ((Number(this.gender.male) / genderTotal) * 100).toFixed(2);
+            this.gender.femalePercent = ((Number(this.gender.female) / genderTotal) * 100).toFixed(2);
+          }
 
-              const ctx = document.getElementById('pieChart');
-              new Chart(ctx, {
-                type: "pie",
-                data: {
-                  labels: [
-                    "Laki-laki",
-                    "Perempuan",
-                  ],
-                  datasets: [{
-                    data: [
-                      this.gender.malePercent,
-                      this.gender.femalePercent,
-                    ],
-                    backgroundColor: [
-                      "rgba(13, 110, 253, 1)",
-                      "rgba(220, 53, 69, 1)",
-                    ],
-                    datalabels: {
-                      color: "rgba(248, 249, 250, 1)"
-                    },
-                  }],
-                },
-                plugins: [
-                  ChartDataLabels,
+          const ctx = document.getElementById('pieChart');
+          new Chart(ctx, {
+            type: "pie",
+            data: {
+              labels: [
+                "Laki-laki",
+                "Perempuan",
+              ],
+              datasets: [{
+                data: [
+                  this.gender.malePercent,
+                  this.gender.femalePercent,
                 ],
-              });
-            });
+                backgroundColor: [
+                  "rgba(13, 110, 253, 1)",
+                  "rgba(220, 53, 69, 1)",
+                ],
+                datalabels: {
+                  color: "rgba(248, 249, 250, 1)"
+                },
+              }],
+            },
+            plugins: [
+              ChartDataLabels,
+            ],
           });
+        });
       }
     }
   }

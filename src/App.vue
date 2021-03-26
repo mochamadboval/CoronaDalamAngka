@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import HeaderNav from './components/HeaderNav.vue'
-import Jumbotron from './components/Jumbotron.vue'
-import Indonesia from './components/Indonesia.vue'
-import Province from './components/Province.vue'
-import Footer from './components/Footer.vue'
+const HeaderNav = () => import('./components/HeaderNav.vue');
+const Jumbotron = () => import('./components/Jumbotron.vue');
+const Indonesia = () => import('./components/Indonesia.vue');
+const Province = () => import('./components/Province.vue');
+const Footer = () => import('./components/Footer.vue');
 
 export default {
   name: 'App',

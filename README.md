@@ -1,4 +1,7 @@
 # Corona Dalam Angka
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dc6359f6-c9d3-4202-b173-0ce047de1d7d/deploy-status)](https://app.netlify.com/sites/coronadalamangka/deploys)
+
 Situs yang menampilkan data kasus COVID-19 di Indonesia beserta Provinsinya. Dibangun menggunakan:
 - HTML
 - CSS

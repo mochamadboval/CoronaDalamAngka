@@ -12,32 +12,32 @@
 </template>
 
 <script>
-const HeaderNav = () => import('./components/HeaderNav.vue');
-const Jumbotron = () => import('./components/Jumbotron.vue');
-const Indonesia = () => import('./components/Indonesia.vue');
-const Province = () => import('./components/Province.vue');
-const Footer = () => import('./components/Footer.vue');
+const HeaderNav = () => import("./components/HeaderNav.vue");
+const Jumbotron = () => import("./components/Jumbotron.vue");
+const Indonesia = () => import("./components/Indonesia.vue");
+const Province = () => import("./components/Province.vue");
+const Footer = () => import("./components/Footer.vue");
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     HeaderNav,
     Jumbotron,
     Indonesia,
     Province,
-    Footer
+    Footer,
   },
-}
+};
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Sen:wght@400;700&display=swap");
 
 html {
   scroll-padding-top: 5rem;
 }
 body {
-  font-family: 'Sen', sans-serif !important;
+  font-family: "Sen", sans-serif !important;
 }
 select {
   cursor: pointer;

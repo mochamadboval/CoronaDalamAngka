@@ -2,18 +2,6 @@
   <div class="container mt-5 mb-3 pt-5 text-center">
     <hr />
     <small>
-      <fa-icon icon="code" /> menggunakan <fa-icon :icon="['fab', 'html5']" />
-      <fa-icon :icon="['fab', 'css3-alt']" />
-      <fa-icon :icon="['fab', 'js-square']" />
-      <fa-icon :icon="['fab', 'bootstrap']" />
-      <fa-icon :icon="['fab', 'vuejs']" />
-      <fa-icon :icon="['fab', 'font-awesome']" /> oleh
-      <strong
-        ><a href="https://boval.my.id/" rel="noreferrer" target="_blank"
-          >Mochamad Boval</a
-        ></strong
-      >
-      <br />
       Sumber Data dari
       <strong>
         <a href="https://covid19.go.id/" rel="noreferrer" target="_blank">
@@ -34,7 +22,7 @@
       Sumber Kode di
       <strong>
         <a
-          href="https://github.com/mochamadboval?tab=repositories"
+          href="https://github.com/mochamadboval/CoronaDalamAngka"
           rel="noreferrer"
           target="_blank"
         >

@@ -178,7 +178,7 @@ export default {
       lastUpdate: "0/0/0000",
     };
   },
-  created() {
+  mounted() {
     axios
       .get(
         "https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi/more"

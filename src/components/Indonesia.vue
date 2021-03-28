@@ -97,7 +97,7 @@ export default {
       lastUpdate: "0/0/0000 00.00",
     };
   },
-  created() {
+  mounted() {
     axios
       .get("https://apicovid19indonesia-v2.vercel.app/api/indonesia/more")
       .then((response) => {

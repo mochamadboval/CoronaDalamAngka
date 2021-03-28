@@ -203,3 +203,8 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import "../assets/custom.scss";
+@import "bootstrap/scss/bootstrap.scss";
+</style>
